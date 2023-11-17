@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+<!--MAIN START -->
+<div class="container">
+
+    <div class="row mt-5">
+
+        <div class="col-md-9">
+            <h5 class="bg-danger text-white p-2" style="width: 49vw;">Delivery Details</h5>
+            {% for x in data %}
+            {%  if forloop.counter == 1 %}
+            
+            <p><strong> Name:</strong>&nbsp;&nbsp;&nbsp;{{x.first_name}} {{x.last_name}}</p>
+            {% endif %}
+            {% endfor %}
+            {% for x in data1 %}
+            {%  if forloop.counter == 1 %}
+            <p><strong>Mobile:</strong>&nbsp;&nbsp;&nbsp;{{x.mobile}}</p>
+            <p><strong>Address:</strong>&nbsp;&nbsp;&nbsp;{{x.address}}</p>
+
+            {% endif %}
+            {% endfor %}
+            <a href="/profile"><button class="btn btn-success">Change</button><br></a>
+            <br>
+            <h5 class="bg-danger text-white p-2" style="width: 49vw;">Order details</h5>
+            {% if errmsg %}
+            <br>
+                <div class="alert alert-danger" style="width: 29vw; height: 7vh; padding-top: 8px">
+
+                    {{errmsg}} <a href="/menu1">MENU</a>
+                </div>
+                {% endif %}
+
+            {% for x in item %}
+
+            <div class="row mt-3">
+
+           
+                
+                <div class="col-md-4  mt-4">
+                    <img src="{{x.pid.pimage.url}}" alt="" width="100%" height="200px">
+                </div>
+                <div class="col-md-6 ">
+                    
+                    <p><strong>Food Name:</strong>&nbsp;&nbsp;&nbsp;{{x.pid.foodname}}</p>
+                    <p><strong>Price:</strong>&nbsp;&nbsp;&nbsp;<i class="bi bi-currency-rupee"></i>{{x.pid.rupess}}</p>
+                    {% if x.pid.food == 1 %}
+                    <p><strong>Category:</strong>&nbsp;&nbsp;&nbsp;Veg</p>
+                    {% else %}
+                    <p><strong>Category:</strong>&nbsp;&nbsp;&nbsp;Non Veg</p>
+                    {% endif %}
+                    <p><strong>Food Details:</strong>&nbsp;&nbsp;&nbsp;{{x.pid.description}}</p>
+                    <!-- <p>
+                        <strong>QTY:</strong>
+                        <a href="/updateqty/0/{{x.id}}"><button class="btn btn-danger">-</button></a>
+                        <input type="number" value="{{x.qty}}"  style="width: 50px;">
+                        <a href="/updateqty/1/{{x.id}}"><button class="btn btn-success">+</button></a>
+                    </p> -->
+                    <a href="/remove/{{x.cid.id}}"><button class="btn btn-danger">Remove</button></a>
+
+                </div>
+                
+            </div>
+            <hr>
+            {% endfor %}
+        </div>
+        <div class="col-md-3">
+            <h5 class="bg-danger text-white p-2">Total Amount</h5>
+
+            <p><strong> Total ({{n}} items):</strong><i class="bi bi-currency-rupee"></i>{{total}}</p>
+            <hr>
+            <p><strong> Total Amount:</strong><i class="bi bi-currency-rupee"></i>{{total}}</p>
+
+            <a href="/makepayment"><button class="btn btn-danger">Procced To Pay</button></a>
+            
+
+
+
+        </div>
+
+    </div>
+
+</div>
+<!--Main end-->
+{% endblock 'main' %}

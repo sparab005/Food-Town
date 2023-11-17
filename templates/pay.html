@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% block 'main' %}
+<div class="container">
+
+    <div class="row mt-5">
+
+        <div class="col-md-9">
+            <h5 class="bg-danger text-white p-2" style="width: 49vw;">Delivery Details</h5>
+            {% for x in data %}
+            {% if forloop.counter == 1 %}
+
+            <p><strong> Name:</strong>&nbsp;&nbsp;&nbsp;{{x.first_name}} {{x.last_name}}</p>
+            {% endif %}
+            {% endfor %}
+            {% for x in data1 %}
+            {% if forloop.counter == 1 %}
+            <p><strong>Mobile:</strong>&nbsp;&nbsp;&nbsp;{{x.mobile}}</p>
+            <p><strong>Address:</strong>&nbsp;&nbsp;&nbsp;{{x.address}}</p>
+
+            {% endif %}
+            {% endfor %}
+            <!-- <a href="/profile"><button class="btn btn-success">Change</button><br></a> -->
+            <br>
+            <h5 class="bg-danger text-white p-2" style="width: 49vw;">Order details</h5>
+            {% if errmsg %}
+            <br>
+            <div class="alert alert-danger" style="width: 29vw; height: 7vh; padding-top: 8px">
+
+                {{errmsg}} <a href="/menu1">MENU</a>
+            </div>
+            {% endif %}
+
+            {% for x in item %}
+
+            <div class="row mt-3">
+
+
+
+                <div class="col-md-4  mt-4">
+                    <img src="{{x.pid.pimage.url}}" alt="" width="100%" height="200px">
+                </div>
+                <div class="col-md-6 ">
+
+                    <p><strong>Food Name:</strong>&nbsp;&nbsp;&nbsp;{{x.pid.foodname}}</p>
+                    <p><strong>Price:</strong>&nbsp;&nbsp;&nbsp;<i class="bi bi-currency-rupee"></i>{{x.pid.rupess}}</p>
+                    {% if x.pid.food == 1 %}
+                    <p><strong>Category:</strong>&nbsp;&nbsp;&nbsp;Veg</p>
+                    {% else %}
+                    <p><strong>Category:</strong>&nbsp;&nbsp;&nbsp;Non Veg</p>
+                    {% endif %}
+                    <p><strong>Food Details:</strong>&nbsp;&nbsp;&nbsp;{{x.pid.description}}</p>
+                    <!-- <p>
+                        <strong>QTY:</strong>
+                        <a href="/updateqty/0/{{x.id}}"><button class="btn btn-danger">-</button></a>
+                        <input type="number" value="{{x.qty}}"  style="width: 50px;">
+                        <a href="/updateqty/1/{{x.id}}"><button class="btn btn-success">+</button></a>
+                    </p> -->
+                    <!-- <a href="/remove/{{x.cid.id}}"><button class="btn btn-danger">Remove</button></a> -->
+
+                </div>
+
+            </div>
+            <hr>
+            {% endfor %}
+        </div>
+        <div class="col-md-3">
+            <h5 class="bg-danger text-white p-2">Total Amount</h5>
+
+            <p><strong> Total ({{n}} items):</strong><i class="bi bi-currency-rupee"></i>{{total}}</p>
+            <hr>
+            <p><strong> Total Amount:</strong><i class="bi bi-currency-rupee"></i>{{total}}</p>
+
+            <!-- <a href="/makepayment"><button class="btn btn-danger">Procced To Pay</button></a> -->
+
+            <button id="rzp-button1" class="btn btn-success mt-1">Pay with Razorpay</button>
+
+            <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+            <script>
+                var options = {
+                    "key": "rzp_test_ntdeDahfUDEpdw", // Enter the Key ID generated from the Dashboard
+                    "amount": "{{datad.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                    "currency": "INR",
+                    "name": "Ekart PVT. LTD",
+                    "description": "Test Transaction",
+                    "image": "https://example.com/your_logo",
+                    "order_id": "{{datad.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                    "handler": function (response) {
+                        // alert(response.razorpay_payment_id);
+                        // alert(response.razorpay_order_id);
+                        // alert(response.razorpay_signature)
+                        window.location.href = "http://localhost:8000/sendmail/{{uemail}}/{{uid}}";
+                    },
+                    "prefill": {
+                        "name": "Gaurav Kumar",
+                        "email": "gaurav.kumar@example.com",
+                        "contact": "9000090000"
+                    },
+                    "notes": {
+                        "address": "Razorpay Corporate Office"
+                    },
+                    "theme": {
+                        "color": "#3399cc"
+                    }
+                };
+                var rzp1 = new Razorpay(options);
+                rzp1.on('payment.failed', function (response) {
+                    alert(response.error.code);
+                    alert(response.error.description);
+                    alert(response.error.source);
+                    alert(response.error.step);
+                    alert(response.error.reason);
+                    alert(response.error.metadata.order_id);
+                    alert(response.error.metadata.payment_id);
+                });
+                document.getElementById('rzp-button1').onclick = function (e) {
+                    rzp1.open();
+                    e.preventDefault();
+                }
+            </script>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock 'main' %}

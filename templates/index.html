@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block 'main' %}
+<div class="container">
+
+
+
+        <div class="iimg">
+
+                <h2 class="main_head" style="font-size: 47px;">Enjoy our <br>Delicious Meal</h2><br>
+                <p class="main_para"><strong>Food for us comes from our relatives,whether they have <br> &nbsp;wings or
+                                fins or
+                                roots. That is
+                                how we consider food. <br>&nbsp;&nbsp;&nbsp;Food has a culture. It has a history. It has
+                                a story.
+                        </strong>
+                </p>
+                <a href="/menu1"> <button type="button" class="btn btn-success main_para" id="menu_btn">Menu</button></a>
+        </div>
+
+
+        
+        {% if success_message %}
+        <script>
+            // Display an alert box after the page loads
+            window.onload = function() {
+                alert("{{ success_message }}");
+            };
+        </script>
+        {% endif %}
+</div>
+{% endblock 'main' %}

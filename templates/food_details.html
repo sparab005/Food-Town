@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'main' %}
+<!--MAIN START -->
+<h3 style="text-align: center; margin-right: 190px;margin-top: 30px;">Food Details</h3>
+<div class="container mt-3">
+   
+    <div class="row mt-5">
+        
+        {% for x in food %}
+        <div class="col-md-4 ">
+            
+
+            <img src="{{x.pimage.url}}" class="img-thumbnail shadow " alt="..."
+                style="width: 25vw; height:40vh ;"><br><br>
+            <!-- <h5 ><strong>{{x.foodname}}</strong></h5> -->
+
+        </div>
+
+        <div class="col-md-6 ">
+            {% if success %}
+
+            <div class="alert alert-success" style="height: 7vh; padding: 7px; width: 23vw;">
+                {{success}}
+            </div>
+
+            {% endif %}
+
+            {% if msg %}
+
+            <div class="alert alert-danger" style="height: 7vh; padding: 7px; width: 23vw;">
+                {{msg}}
+            </div>
+
+            {% endif %}
+            <p><strong>Food Name:</strong>&nbsp;&nbsp;&nbsp;{{x.foodname}}</p>
+            <p><strong>Price:</strong>&nbsp;&nbsp;&nbsp;{{x.rupess}}</p>
+            {% if x.food == 1 %}
+            <i class="bi bi-0-square" style="color: green; font-size: 14px;"></i><b
+                style="font-size: 14px; color: green;">Veg</b><br>
+            {% else %}
+            <i class="bi bi-0-square" style="color: red; font-size: 14px;"></i><b
+                style="font-size: 14px; color: red;"> Non Veg</b><br>
+            {% endif %}
+            <br>
+            <p><strong>Food Details:</strong>&nbsp;&nbsp;&nbsp;{{x.description}}</p>
+            <br>
+            <a href="/addtocart/{{x.id}}"><button class="btn btn-danger">Add to cart</button></a>
+            <a href="/cart"><button class="btn btn-danger">View cart</button></a>
+            <a href="/menu1"><button class="btn btn-danger">Add More Items</button></a><br><br>
+            
+
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<!--Main end-->
+{% endblock 'main' %}

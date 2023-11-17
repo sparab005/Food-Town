@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block 'main' %}
+
+<!--MAIN Start -->
+<div class="row mt-3">
+
+    <div class="col-md-4 bg-light ">
+        <div>
+            <h4 style="text-align: center;">&nbsp;Filter by Food Category</h4>
+            <hr>
+
+        </div>
+        <div class="row">
+            {% for x in menu %}
+
+            <div class="col-md-6 mt-4 ">
+
+                <a href="/catfiltermenu/{{x.id}}">
+                    <div class="card">
+                        <img src="{{x.pimage.url}}" class="card-img-top" alt="..." >
+                        <div class="card-body">
+                            <h5 class="card-title" style="text-align: center;">{{x.name}}
+                            </h5><br><br>
+
+                        </div>
+                    </div>
+                </a>
+                <br>
+            </div>
+
+            {% endfor %}
+        </div>
+        <a href="/menu1" class="btn btn-primary" style="width: 100px; margin-left: 15px; height: 38px;">Reset</a>
+
+
+        <div class="vertical-line">
+
+        </div>
+
+    </div> <!--filter col side bar end-->
+
+    <div class="col-md-8">
+        <div class="row">
+            <div>
+                <h4 style="text-align: center;">Food</h4>
+                <hr>
+            </div>
+            {% for x in foodmenu %}
+
+            <div class="col-md-4 mt-4  ">
+
+                <div class="card " style="width: 100%; height: 100%;">
+                    <!-- src="{% static 'assets/images/burger.jpg'   %}" -->
+                    <img src="{{x.pimage.url}}" class="card-img-top" alt="..." style="height: 22vh;">
+                    <div class="card-body"  >
+                        <h5 class="card-title" style="font-size:small;"><strong>{{x.foodname}}</strong></h5>
+                        {% if x.food == 1 %}
+                        <i class="bi bi-0-square" style="color: green; font-size: 14px;"></i><b
+                            style="font-size: 14px; color: green;">Veg</b><br>
+                        {% else %}
+                        <i class="bi bi-0-square" style="color: red; font-size: 14px;"></i><b
+                            style="font-size: 14px; color: red;"> Non Veg</b><br>
+                        {% endif %}
+                        
+                        <P><i class="bi bi-currency-rupee"></i><strong>{{x.rupess}}</strong></P>
+                        <div>
+                            <a href="/food_details/{{x.id}}" class="btn btn-outline-success  btn-sm"
+                                style="position: absolute; bottom: 15px; ">Order</a>
+                        <!-- <a href="/{{x.name}}" class="btn btn-outline-success  btn-sm">Order</a> -->
+                        </div>
+
+                    </div>
+                </div><br><br>
+            </div>
+            {% endfor %}
+
+            {% for x in menuRestaurant %}
+            <div class="col-md-4 mt-4  ">
+                <div class="card " style="width: 100%; height: 100%; ">
+                    <!-- src="{% static 'assets/images/burger.jpg'   %}" -->
+                    <img src="{{x.pimage.url}}" class="card-img-top" alt="..." style="height: 25vh;">
+                    <div class="card-body"  >
+                        <h5 class="card-title" style="font-size:small;"><strong>{{x.foodname}}</strong></h5>
+                        {% if x.food == 1 %}
+                        <i class="bi bi-0-square" style="color: green; font-size: 14px;"></i><b
+                            style="font-size: 14px; color: green;">Veg</b><br>
+                        {% else %}
+                        <i class="bi bi-0-square" style="color: red; font-size: 14px;"></i><b
+                            style="font-size: 14px; color: red;"> Non Veg</b><br>
+                        {% endif %}
+                        
+                        <p class="card-text" style=" font-size: smaller;">{{x.variety}}</p><br>
+                        <div>
+                            <a href="/food_details/{{x.id}}" class="btn btn-outline-success  btn-sm"
+                                style="position: absolute; bottom: 15px; ">Order</a>
+                        <!-- <a href="/{{x.name}}" class="btn btn-outline-success  btn-sm">Order</a> -->
+                        </div>
+
+                    </div>
+                </div><br>
+
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+    </div> <!--Product col bar end-->
+</div><!-- product and filter row end -->
+<!--MAIN END-->
+
+
+
+
+
+{% endblock 'main' %}

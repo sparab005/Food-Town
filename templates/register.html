@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block 'main' %}
+
+<div class="container">
+
+
+
+    <div class="img">
+
+        <div class="row">
+            <div class="col-md-5 shadow-lg p-3 mx-auto mt-5" style="background-color: #ffffff45;">
+                <h3 style="text-align: center;">Registration Form</h3>
+                {% if errmsg %}
+                <div class="alert alert-danger">
+
+                    {{errmsg}}
+                </div>
+                {% endif %}
+                {% if success %}
+                <div class="alert alert-success">
+
+                    {{success}}<a href="/login" style="text-decoration: none;">Login</a>
+                </div>
+                {% endif %}
+                <form action="/register" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="input1" class="form-label"><strong>Username :-</strong></label>
+                        <input type="text" class="form-control" id="input1" name="uname" placeholder="Enter Username">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="input2" class="form-label"><strong>Email :-</strong></label>
+                        <input type="email" class="form-control" id="input2" name="email"
+                            placeholder="Enter Email Address">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="input3" class="form-label"><strong>Password :-</strong></label>
+                        <input type="password" class="form-control" id="input3" name="upass"
+                            placeholder="Enter Password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="input3" class="form-label"><strong> Confirm Password :-</strong></label>
+                        <input type="password" class="form-control" id="input3" name="ucpass"
+                            placeholder="Enter Password Again">
+                    </div>
+
+                   
+                    <div class="mb-3" style="text-align: center;">
+
+                        <input type="submit" value="Register" class="btn btn-success  ps-4 pe-4">
+                        Already User ? <a href="/login" style="text-decoration: none;">Login</a>
+
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+<br>
+    </div>
+    <br><br>
+</div>
+
+
+{% endblock 'main' %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block 'main' %}
+<h3 style="text-align: center; margin-right: 190px;margin-top: 30px;">Order History</h3>
+<div class="container mt-3 ms-5">
+
+    <div class="row mt-5 ms-5">
+
+
+        {% for x in data %}
+
+        <div class="col-md-4 ">
+
+
+            <img src="{{x.pid.pimage.url}}" class="img-thumbnail shadow " alt="..." style="width: 22vw; height:35vh ;">
+            <!-- <h5 ><strong>{{x.foodname}}</strong></h5> -->
+
+        </div>
+
+        <div class="col-md-6 ">
+
+            <p><strong>Order Id:</strong>&nbsp;&nbsp;&nbsp;{{x.order_id}}</p>
+            <p><strong>Food Name:</strong>&nbsp;&nbsp;&nbsp;{{x.pid.foodname}}</p>
+            <p><strong>Total Rupess:</strong>&nbsp;&nbsp;&nbsp;<i class="bi bi-currency-rupee"></i>{{x.rupess}}
+            </p>
+            {% if x.pid.food == 1 %}
+            <p><strong>Category:</strong>&nbsp;&nbsp;&nbsp;
+                <i class="bi bi-0-square" style="color: green; font-size: 14px;"></i><b
+                    style="font-size: 14px; color: green;">Veg</b><br>
+                {% else %}
+            <p><strong>Category:</strong>&nbsp;&nbsp;&nbsp;
+                <i class="bi bi-0-square" style="color: red; font-size: 14px;"></i><b
+                    style="font-size: 14px; color: red;"> Non Veg</b><br>
+                {% endif %}
+
+            <p><strong>Payment:</strong>&nbsp;&nbsp;&nbsp; Done &#9989;</p>
+            <br>
+            <br>
+        </div>
+        <hr class="ms-3 " style="width: 80%;"><br>
+        {% endfor %}
+
+
+    </div>
+</div>
+</div>
+
+
+
+
+
+{% endblock 'main' %}

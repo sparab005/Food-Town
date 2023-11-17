@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block 'main' %}
+<div class="container ">
+    <div class="img">
+
+        <div class="row  ">
+            <div class="col-md-5 shadow-lg p-3 mx-auto " style="background-color: #ffffff45; margin-top: 20vh;">
+                <h3 style="text-align: center;">Login Form</h3><br>
+                {% if errmsg %}
+                <div class="alert alert-danger">
+
+                    {{errmsg}}
+                </div>
+                {% endif %}
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="input1" class="form-label">USERNAME :-</label>
+                        <input type="text" class="form-control" name="uname" id="input1" placeholder="Enter Username">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="input2" class="form-label">PASSWORD :-</label>
+                        <input type="password" class="form-control"  name="upass" id="input2" placeholder="Enter Password">
+                    </div>
+
+
+
+                    <div class="mb-3" style="text-align: center;">
+
+                        &nbsp;<input type="submit" value="Login" class="btn btn-success  ps-5 pe-5" width="220px">
+                        Not User ? <a href="/register" style="text-decoration: none;">Register Here</a>
+                    </div>
+
+
+
+                </form>
+                <br>
+                <br>
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>
+
+{% endblock 'main' %}
